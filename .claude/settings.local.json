@@ -1,0 +1,36 @@
+{
+  "permissions": {
+    "allow": [
+      "Bash(powershell -Command \"Get-ChildItem -Path ''c:\\\\laragon\\\\www\\\\millionvpn'' -Force | Format-Table -AutoSize\")",
+      "Bash(powershell -Command \"Get-ChildItem -Path ''c:\\\\laragon\\\\www\\\\millionvpn\\\\.claude'' -Force -Recurse | Format-Table -AutoSize\")",
+      "Bash(powershell -Command:*)",
+      "Bash(npx create-next-app:*)",
+      "Bash(npx create-next-app@latest millionvpn-temp --typescript --tailwind --eslint --app --src-dir --import-alias \"@/*\" --use-npm --no-git)",
+      "Bash(npm install:*)",
+      "Bash(npm run build:*)",
+      "Bash(npm run dev:*)",
+      "Bash(timeout:*)",
+      "mcp__chrome-devtools__new_page",
+      "mcp__chrome-devtools__list_pages",
+      "mcp__chrome-devtools__select_page",
+      "mcp__chrome-devtools__navigate_page",
+      "mcp__chrome-devtools__take_screenshot",
+      "Bash(taskkill:*)",
+      "mcp__chrome-devtools__take_snapshot",
+      "mcp__chrome-devtools__fill_form",
+      "mcp__supabase__list_tables",
+      "mcp__supabase__get_publishable_keys",
+      "mcp__chrome-devtools__click",
+      "mcp__supabase__execute_sql",
+      "mcp__chrome-devtools__wait_for",
+      "mcp__chrome-devtools__fill",
+      "Bash(git config:*)",
+      "Bash(git push:*)",
+      "Bash(git add:*)"
+    ]
+  },
+  "enableAllProjectMcpServers": true,
+  "enabledMcpjsonServers": [
+    "supabase"
+  ]
+}
