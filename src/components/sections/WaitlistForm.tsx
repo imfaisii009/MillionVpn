@@ -154,7 +154,7 @@ export default function WaitlistForm({ source = 'hero', className }: WaitlistFor
               </p>
             )}
 
-            <p className="text-xs text-gray-400 text-center">No spam, ever. Unsubscribe anytime.</p>
+            <p className="text-xs text-gray-500 text-center">No spam, ever. Unsubscribe anytime.</p>
           </motion.form>
         )}
       </AnimatePresence>

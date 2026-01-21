@@ -1,0 +1,682 @@
+---
+alwaysApply: false
+---
+
+# Expert-Level On-Page SEO Checklist for MillionVPN
+
+Follow all parts while developing features to ensure maximum search visibility and conversion optimization.
+
+---
+
+## Part 1: Strategic & Foundational Blueprint
+
+### 1.1 Align with User Intent & Semantic SEO
+
+**Target search intents:**
+
+| Intent Type | Example Queries |
+|-------------|-----------------|
+| Informational | "What is a VPN", "How does VPN work", "Is VPN legal", "VPN vs proxy" |
+| Transactional | "Buy VPN", "Best VPN deal", "Cheap VPN subscription", "VPN free trial" |
+| Commercial | "Best VPN 2024", "VPN comparison", "Fastest VPN", "Most secure VPN" |
+| Navigational | "MillionVPN download", "MillionVPN pricing", "MillionVPN login" |
+
+**Build keyword clusters:**
+
+Primary keywords:
+- "best VPN service"
+- "fast VPN"
+- "secure VPN"
+- "cheap VPN"
+- "VPN for streaming"
+- "VPN for gaming"
+
+Secondary/Long-tail keywords:
+- "VPN with kill switch"
+- "no-logs VPN"
+- "VPN 5 devices"
+- "VPN free trial 7 days"
+- "VPN 90% discount"
+- "VPN unlimited bandwidth"
+- "AES-256 encryption VPN"
+
+Use-case keywords:
+- "VPN for Netflix"
+- "VPN for torrenting"
+- "VPN for privacy"
+- "VPN for public WiFi"
+- "VPN for travel"
+- "VPN for remote work"
+
+**Benchmark competitors & identify information gain:**
+- NordVPN, ExpressVPN, Surfshark, ProtonVPN have comprehensive comparison tables
+- Gap opportunity: Interactive speed test results, real-time server status, transparent pricing calculator
+- Create deeper content: VPN setup guides per platform, security explainers, use-case tutorials
+
+**People-first content additions:**
+- Real speed test data with methodology
+- Server count by country (verifiable)
+- Independent security audit mentions (if available)
+- Customer testimonials with specific use cases
+
+### 1.2 Demonstrate E-E-A-T (Experience, Expertise, Authoritativeness, Trust)
+
+**Trust signals to implement:**
+
+1. **Company credibility:**
+   - About page with company history, mission, team (if applicable)
+   - Physical address or jurisdiction disclosure
+   - Contact information (email, support form)
+
+2. **Security credentials:**
+   - Encryption standards (AES-256)
+   - No-logs policy statement
+   - Kill switch feature
+   - Third-party audit mentions (if any)
+
+3. **Social proof:**
+   - Customer testimonials with ratings
+   - Review aggregation (Trustpilot, G2, etc.)
+   - Download/user counts
+   - Media mentions or awards
+
+4. **Legal compliance:**
+   - Privacy Policy (detailed, VPN-specific)
+   - Terms of Service
+   - Refund Policy (30-day money-back guarantee)
+   - GDPR compliance statement
+
+**Required pages for trust:**
+- `/about` - Company information
+- `/privacy-policy` - Privacy Policy
+- `/terms` - Terms of Service
+- `/refund-policy` - Refund Policy
+- `/help` - Help Center / Support
+
+**Add "Last Updated" dates** to all legal pages and feature pages (LLMs and Google reward freshness).
+
+---
+
+## Part 2: Core Technical Implementation
+
+### 2.1 URL & Site Structure
+
+**Clean URL architecture:**
+
+```
+/                           # Homepage
+/pricing                    # Pricing page
+/features                   # Features overview
+/download                   # Download page
+/download/windows           # Windows download
+/download/mac               # macOS download
+/download/ios               # iOS download
+/download/android           # Android download
+/download/linux             # Linux download
+/download/chrome            # Chrome extension
+/download/firefox           # Firefox extension
+/help                       # Help Center
+/help/setup-windows         # Platform-specific guides
+/help/setup-mac
+/help/troubleshooting
+/about                      # About us
+/privacy-policy             # Privacy Policy
+/terms                      # Terms of Service
+/refund-policy              # Refund Policy
+```
+
+**URL rules:**
+- Use HTTPS only (redirect HTTP → HTTPS)
+- Lowercase, hyphenated slugs
+- No trailing slashes (or consistent trailing slashes)
+- No file extensions (.html, .php)
+- Redirect www to non-www (or vice versa, pick one)
+
+### 2.2 Crawlability & Indexability
+
+**robots.txt configuration:**
+
+```txt
+User-agent: *
+Allow: /
+
+# Allow AI crawlers for discovery
+User-agent: GPTBot
+Allow: /
+
+User-agent: ChatGPT-User
+Allow: /
+
+User-agent: Bingbot
+Allow: /
+
+User-agent: Googlebot
+Allow: /
+
+# Disallow non-essential paths
+Disallow: /api/
+Disallow: /checkout/
+Disallow: /_next/
+
+Sitemap: https://millionvpn.com/sitemap.xml
+```
+
+**Sitemap requirements:**
+- Generate XML sitemap with Next.js
+- Include all public pages with lastmod dates
+- Submit to Google Search Console + Bing Webmaster Tools
+- Implement IndexNow for instant Bing indexing on content updates
+
+### 2.3 Canonicalization & Duplicate Content
+
+- Add self-referencing canonical tags on all pages
+- Handle UTM parameters (exclude from canonical)
+- Manage pagination properly (if implementing blog later)
+- Use `rel="canonical"` in `<head>` of every page
+
+**Next.js implementation:**
+```tsx
+// In app/layout.tsx or page.tsx
+export const metadata = {
+  alternates: {
+    canonical: 'https://millionvpn.com/pricing',
+  },
+}
+```
+
+### 2.4 Internal Linking Strategy
+
+**Link distribution targets:**
+
+| Page | Minimum Internal Links |
+|------|----------------------|
+| Homepage | Hub to all sections |
+| Pricing | 5+ (from features, FAQ, CTA sections) |
+| Features | 4+ (from homepage, pricing, help) |
+| Download | 4+ (from hero, pricing, features) |
+| Help Center | 3+ (from footer, features, FAQ) |
+
+**Anchor text examples (descriptive, keyword-rich):**
+- "See our VPN pricing plans"
+- "Download MillionVPN for Windows"
+- "Learn about our no-logs policy"
+- "Start your 7-day free trial"
+- "Military-grade encryption features"
+
+**Avoid orphan pages** - every page must have at least 2 internal links pointing to it.
+
+---
+
+## Part 3: On-Page Content & Elements
+
+### 3.1 Title Tags & Meta Descriptions
+
+**Title tag templates (<60 characters, keyword front-loaded):**
+
+| Page | Title Tag |
+|------|-----------|
+| Homepage | `MillionVPN - Fast, Secure & Affordable VPN Service` |
+| Pricing | `VPN Pricing Plans - From $1.99/mo | MillionVPN` |
+| Features | `VPN Features - AES-256 Encryption & No Logs | MillionVPN` |
+| Download | `Download VPN for All Devices | MillionVPN` |
+| Windows | `Download VPN for Windows | MillionVPN` |
+| Help | `Help Center & Support | MillionVPN` |
+
+**Meta description templates (<155 characters, with CTA):**
+
+| Page | Meta Description |
+|------|------------------|
+| Homepage | `Protect your privacy with MillionVPN. 10 Gbps speeds, 100+ countries, 5 devices. 90% OFF 2-year plan. Try free for 7 days.` |
+| Pricing | `Get MillionVPN from $1.99/mo. All plans include unlimited bandwidth, kill switch & 30-day money-back guarantee. Start free trial.` |
+| Features | `Military-grade AES-256 encryption, strict no-logs policy, kill switch & 1000+ servers. Discover why MillionVPN keeps you safe.` |
+| Download | `Download MillionVPN for Windows, Mac, iOS, Android & Linux. One-click setup, connect in seconds. Get protected now.` |
+
+### 3.2 Heading Structure
+
+**Homepage H-tag hierarchy:**
+
+```
+H1: "Secure Your Digital Life with MillionVPN" (one per page)
+
+H2: "Why Choose MillionVPN" (Features section)
+  H3: "Military-Grade Encryption"
+  H3: "Strict No-Logs Policy"
+  H3: "Global Server Network"
+  H3: "Kill Switch Protection"
+  H3: "Lightning Fast Speeds"
+  H3: "Easy to Use"
+
+H2: "How MillionVPN Works" (How it works section)
+  H3: "Choose Your Plan"
+  H3: "Download the App"
+  H3: "Connect & Browse Securely"
+
+H2: "Simple, Transparent Pricing" (Pricing section)
+  H3: "Monthly Plan"
+  H3: "1-Year Plan"
+  H3: "2-Year Plan - Best Value"
+
+H2: "Available on All Your Devices" (Platforms section)
+
+H2: "What Our Users Say" (Testimonials section)
+
+H2: "Frequently Asked Questions" (FAQ section)
+```
+
+### 3.3 Visual & Media Optimization
+
+**Image requirements:**
+- Use WebP format (with PNG/JPG fallback)
+- Lazy load below-fold images
+- Specify width/height to prevent CLS
+- Compress to <100KB per image
+
+**Alt text examples (descriptive + keywords):**
+- `"MillionVPN app interface showing one-click connect button"`
+- `"VPN server map showing 100+ country locations"`
+- `"Windows VPN download button for MillionVPN"`
+- `"Mobile VPN app screenshot on iPhone"`
+- `"AES-256 encryption shield icon representing VPN security"`
+
+**Video (if used):**
+- Add VideoObject schema
+- Include transcript for accessibility
+- Host on YouTube/Vimeo for better loading
+
+### 3.4 Readability & Formatting
+
+**TL;DR pattern (LLMs quote this first):**
+
+Every key page should start with a 2-3 sentence summary:
+
+```tsx
+<div className="speakable-tldr">
+  <p>
+    MillionVPN protects your online privacy with military-grade AES-256
+    encryption and a strict no-logs policy. Get 10 Gbps speeds across
+    1,000+ servers in 100+ countries. Plans start at $1.99/mo with a
+    7-day free trial.
+  </p>
+</div>
+```
+
+**Content formatting rules:**
+- Short paragraphs (2-3 sentences max)
+- Bullet points for feature lists
+- Bold key terms and benefits
+- Use comparison tables where relevant
+- Add jump links / table of contents for long pages
+
+---
+
+## Part 4: Page Experience & Performance
+
+### 4.1 Core Web Vitals Targets
+
+| Metric | Target | Implementation |
+|--------|--------|----------------|
+| LCP (Largest Contentful Paint) | <2.5s | Preload hero image, optimize fonts, use Next.js Image |
+| INP (Interaction to Next Paint) | <200ms | Minimize JS, defer non-critical scripts, optimize React hydration |
+| CLS (Cumulative Layout Shift) | <0.1 | Reserve space for images/ads, avoid dynamic content injection |
+
+**Performance optimizations:**
+- Use Next.js App Router with server components
+- Implement font-display: swap for Inter font
+- Preload critical assets in `<head>`
+- Code-split by route
+- Use Vercel Edge for CDN delivery
+
+### 4.2 UX & Accessibility
+
+**Mobile-first requirements:**
+- Touch targets minimum 44x44px
+- Responsive breakpoints (sm: 640px, md: 768px, lg: 1024px, xl: 1280px)
+- Mobile navigation (hamburger menu)
+- Thumb-friendly CTA placement
+
+**Accessibility (WCAG 2.1 AA):**
+- ARIA labels on interactive elements
+- Keyboard navigation support
+- Color contrast ratio 4.5:1 minimum
+- Focus indicators visible
+- Screen reader compatible
+
+**Navigation aids:**
+- Sticky header with key CTAs
+- Footer with sitemap links
+- Breadcrumbs on sub-pages
+- Jump links in FAQ/Help sections
+
+### 4.3 Security & Trust Signals
+
+**Visual trust indicators:**
+- HTTPS padlock (automatic with proper SSL)
+- Payment security badges (Stripe, major cards)
+- Money-back guarantee badge
+- "No Logs" certification badge
+- Platform availability icons
+
+**Trust badge placement:**
+- Hero section: Rating + review count
+- Pricing section: Money-back guarantee, payment methods
+- Footer: Security certifications, contact info
+
+---
+
+## Part 5: Structured Data for Enhanced Visibility
+
+### 5.1 Schema Strategy (JSON-LD only)
+
+**Required schema types:**
+
+1. **Organization Schema** (site-wide)
+```json
+{
+  "@context": "https://schema.org",
+  "@type": "Organization",
+  "name": "MillionVPN",
+  "url": "https://millionvpn.com",
+  "logo": "https://millionvpn.com/logo.png",
+  "sameAs": [
+    "https://twitter.com/millionvpn",
+    "https://facebook.com/millionvpn"
+  ],
+  "contactPoint": {
+    "@type": "ContactPoint",
+    "contactType": "customer support",
+    "email": "support@millionvpn.com"
+  }
+}
+```
+
+2. **Product Schema** (Pricing page)
+```json
+{
+  "@context": "https://schema.org",
+  "@type": "Product",
+  "name": "MillionVPN 2-Year Plan",
+  "description": "Fast, secure VPN service with 10 Gbps speeds and 100+ server locations",
+  "brand": {
+    "@type": "Brand",
+    "name": "MillionVPN"
+  },
+  "offers": {
+    "@type": "Offer",
+    "price": "47.76",
+    "priceCurrency": "USD",
+    "priceValidUntil": "2025-12-31",
+    "availability": "https://schema.org/InStock",
+    "url": "https://millionvpn.com/pricing"
+  },
+  "aggregateRating": {
+    "@type": "AggregateRating",
+    "ratingValue": "4.8",
+    "reviewCount": "1250"
+  }
+}
+```
+
+3. **FAQPage Schema** (FAQ sections)
+```json
+{
+  "@context": "https://schema.org",
+  "@type": "FAQPage",
+  "mainEntity": [
+    {
+      "@type": "Question",
+      "name": "What is a VPN?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "A VPN (Virtual Private Network) encrypts your internet connection and hides your IP address, protecting your online privacy and security."
+      }
+    },
+    {
+      "@type": "Question",
+      "name": "How much does MillionVPN cost?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "MillionVPN starts at $1.99/month on the 2-year plan (90% off). Monthly plans are $4.99/month. All plans include a 7-day free trial and 30-day money-back guarantee."
+      }
+    }
+  ]
+}
+```
+
+4. **SoftwareApplication Schema** (Download page)
+```json
+{
+  "@context": "https://schema.org",
+  "@type": "SoftwareApplication",
+  "name": "MillionVPN",
+  "operatingSystem": "Windows, macOS, iOS, Android, Linux",
+  "applicationCategory": "SecurityApplication",
+  "offers": {
+    "@type": "Offer",
+    "price": "1.99",
+    "priceCurrency": "USD"
+  },
+  "aggregateRating": {
+    "@type": "AggregateRating",
+    "ratingValue": "4.8",
+    "reviewCount": "1250"
+  }
+}
+```
+
+5. **BreadcrumbList Schema** (all sub-pages)
+```json
+{
+  "@context": "https://schema.org",
+  "@type": "BreadcrumbList",
+  "itemListElement": [
+    {
+      "@type": "ListItem",
+      "position": 1,
+      "name": "Home",
+      "item": "https://millionvpn.com"
+    },
+    {
+      "@type": "ListItem",
+      "position": 2,
+      "name": "Download",
+      "item": "https://millionvpn.com/download"
+    }
+  ]
+}
+```
+
+### 5.2 AI & Voice Search Optimization
+
+**Speakable Schema Implementation:**
+
+Create SpeakableSpecification for voice assistant compatibility:
+
+```tsx
+// src/components/structured-data/SpeakableSchema.tsx
+interface SpeakableSchemaProps {
+  pageName: string
+  description: string
+  priceFrom?: string
+}
+
+export function SpeakableSchema({ pageName, description, priceFrom }: SpeakableSchemaProps) {
+  const schema = {
+    '@context': 'https://schema.org',
+    '@type': 'WebPage',
+    name: pageName,
+    description: priceFrom
+      ? `${description} Prices from ${priceFrom} per month with 7-day free trial.`
+      : description,
+    speakable: {
+      '@type': 'SpeakableSpecification',
+      cssSelector: [
+        '.speakable-headline',
+        '.speakable-tldr',
+        '.speakable-pricing',
+        '.speakable-cta',
+      ],
+    },
+  }
+
+  return (
+    <script
+      type="application/ld+json"
+      dangerouslySetInnerHTML={{ __html: JSON.stringify(schema) }}
+    />
+  )
+}
+```
+
+**Add speakable CSS classes to content:**
+
+```tsx
+// Hero headline
+<h1 className="speakable-headline">
+  Secure Your Digital Life with MillionVPN
+</h1>
+
+// TL;DR for LLMs and voice assistants
+<div className="speakable-tldr">
+  <p>
+    MillionVPN offers military-grade encryption, 10 Gbps speeds,
+    and servers in 100+ countries. Protect 5 devices for just
+    $1.99/month with our 2-year plan.
+  </p>
+</div>
+
+// Pricing highlight
+<div className="speakable-pricing">
+  <p>Starting at $1.99 per month. 7-day free trial included.</p>
+</div>
+
+// Call to action
+<div className="speakable-cta">
+  <p>Start your free trial today. No credit card required for 7 days.</p>
+</div>
+```
+
+**Voice query optimization targets:**
+- "What is the best cheap VPN?"
+- "How much does MillionVPN cost?"
+- "Is MillionVPN safe?"
+- "Does MillionVPN have a free trial?"
+
+**FAQ answers for AI Overviews (short, declarative):**
+- Keep answers under 50 words for featured snippet eligibility
+- Start with direct answer, then expand
+- Use numbers and specifics ("$1.99/month", "100+ countries", "7-day free trial")
+
+---
+
+## Part 6: Engagement & Conversion Optimization
+
+### 6.1 Above-the-Fold CTAs
+
+**Primary CTAs (visible without scrolling):**
+- "Get Started" (primary button, purple #6D4AFF)
+- "Try 7 Days Free" (secondary button)
+
+**CTA button best practices:**
+- High contrast (white text on purple)
+- Action-oriented text
+- Visible on mobile without scrolling
+- Repeated at section breaks
+
+### 6.2 Social Proof Placement
+
+**Strategic testimonial placement:**
+- Below pricing section (reduces purchase anxiety)
+- Near CTAs (reinforces trust at decision point)
+- In FAQ section (answers "Is it worth it?")
+
+**Review schema for testimonials:**
+```json
+{
+  "@type": "Review",
+  "reviewRating": {
+    "@type": "Rating",
+    "ratingValue": "5",
+    "bestRating": "5"
+  },
+  "author": {
+    "@type": "Person",
+    "name": "John D."
+  },
+  "reviewBody": "Fastest VPN I've ever used. Streaming works perfectly."
+}
+```
+
+### 6.3 Interactive Elements (Engagement Boosters)
+
+**High-engagement features to consider:**
+- Server location map (interactive)
+- Speed test comparison tool
+- "Which plan is right for me?" quiz
+- Live chat support (Phase 2)
+
+### 6.4 Exit Intent & Retention
+
+**Conversion optimization tactics:**
+- Exit-intent popup with discount offer
+- Sticky mobile CTA bar
+- "Last chance" pricing timer (use sparingly)
+- Email capture for abandoned carts
+
+---
+
+## Implementation Checklist
+
+### Phase 1: Foundation
+- [ ] Set up Next.js metadata API for all pages
+- [ ] Configure robots.txt
+- [ ] Generate XML sitemap
+- [ ] Implement canonical tags
+- [ ] Add Organization schema
+
+### Phase 2: On-Page SEO
+- [ ] Optimize all title tags (<60 chars)
+- [ ] Write meta descriptions (<155 chars)
+- [ ] Structure H-tags properly
+- [ ] Add alt text to all images
+- [ ] Implement TL;DR sections
+
+### Phase 3: Structured Data
+- [ ] Add Product schema to pricing
+- [ ] Add FAQPage schema
+- [ ] Add SoftwareApplication schema
+- [ ] Add BreadcrumbList schema
+- [ ] Add Speakable schema
+
+### Phase 4: Performance
+- [ ] Achieve Lighthouse 90+ score
+- [ ] Pass Core Web Vitals
+- [ ] Optimize images (WebP, lazy load)
+- [ ] Minimize JavaScript bundle
+
+### Phase 5: Trust & Conversion
+- [ ] Add trust badges
+- [ ] Implement testimonials with schema
+- [ ] Create legal pages
+- [ ] Add money-back guarantee messaging
+
+---
+
+## Monitoring & Maintenance
+
+**Weekly checks:**
+- Google Search Console for indexing issues
+- Core Web Vitals monitoring
+- Broken link checker
+
+**Monthly tasks:**
+- Update "Last Updated" dates on key pages
+- Review keyword rankings
+- Analyze conversion funnels
+- Check competitor SERP changes
+
+**Tools to use:**
+- Google Search Console
+- Bing Webmaster Tools
+- Google PageSpeed Insights
+- Ahrefs/SEMrush (keyword tracking)
+- Hotjar (user behavior)

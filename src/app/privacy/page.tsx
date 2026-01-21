@@ -1,7 +1,22 @@
-'use client';
-
+import { Metadata } from 'next';
 import Navbar from '@/components/layout/Navbar';
 import Footer from '@/components/layout/Footer';
+
+// ISR: Revalidate daily (legal content rarely changes)
+export const revalidate = 86400;
+
+export const metadata: Metadata = {
+    title: 'Privacy Policy',
+    description:
+        'MillionVPN Privacy Policy. Learn about our strict no-logs policy and how we protect your data. We never track, collect, or share your private information.',
+    alternates: {
+        canonical: 'https://millionvpn.com/privacy',
+    },
+    robots: {
+        index: true,
+        follow: true,
+    },
+};
 
 export default function PrivacyPolicy() {
     return (

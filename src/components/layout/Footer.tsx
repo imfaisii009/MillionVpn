@@ -16,9 +16,15 @@ export default function Footer() {
                             Secure your digital life with military-grade encryption. Access content from anywhere in the world at lightning speeds.
                         </p>
                         <div className="flex space-x-4">
-                            {[Twitter, Github, Linkedin, Facebook, Instagram].map((Icon, i) => (
-                                <a key={i} href="#" className="text-gray-400 hover:text-primary-600 transition-colors p-2 hover:bg-primary-50 rounded-full">
-                                    <Icon className="h-5 w-5" />
+                            {[
+                                { Icon: Twitter, label: 'Follow us on Twitter' },
+                                { Icon: Github, label: 'View our GitHub' },
+                                { Icon: Linkedin, label: 'Connect on LinkedIn' },
+                                { Icon: Facebook, label: 'Like us on Facebook' },
+                                { Icon: Instagram, label: 'Follow us on Instagram' },
+                            ].map(({ Icon, label }, i) => (
+                                <a key={i} href="#" className="text-gray-500 hover:text-primary-600 transition-colors p-2 hover:bg-primary-50 rounded-full" aria-label={label}>
+                                    <Icon className="h-5 w-5" aria-hidden="true" />
                                 </a>
                             ))}
                         </div>
@@ -53,7 +59,7 @@ export default function Footer() {
                     </div>
                 </div>
 
-                <div className="pt-8 border-t border-gray-200 flex flex-col md:flex-row justify-between items-center text-sm text-gray-400">
+                <div className="pt-8 border-t border-gray-200 flex flex-col md:flex-row justify-between items-center text-sm text-gray-500">
                     <p>© {new Date().getFullYear()} MillionVPN. All rights reserved.</p>
                     <div className="flex space-x-8 mt-4 md:mt-0">
                         <span>Made with ❤️ for privacy</span>

@@ -8,6 +8,9 @@ import Testimonials from '@/components/sections/Testimonials';
 import FAQ from '@/components/sections/FAQ';
 import Download from '@/components/sections/Download';
 
+// ISR: Revalidate every hour
+export const revalidate = 3600;
+
 export default function Home() {
   return (
     <main className="min-h-screen bg-white">

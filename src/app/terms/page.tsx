@@ -1,7 +1,22 @@
-'use client';
-
+import { Metadata } from 'next';
 import Navbar from '@/components/layout/Navbar';
 import Footer from '@/components/layout/Footer';
+
+// ISR: Revalidate daily (legal content rarely changes)
+export const revalidate = 86400;
+
+export const metadata: Metadata = {
+    title: 'Terms of Service',
+    description:
+        'MillionVPN Terms of Service. Read our acceptable use policy, refund policy, and service terms. 30-day money-back guarantee on all plans.',
+    alternates: {
+        canonical: 'https://millionvpn.com/terms',
+    },
+    robots: {
+        index: true,
+        follow: true,
+    },
+};
 
 export default function Terms() {
     return (

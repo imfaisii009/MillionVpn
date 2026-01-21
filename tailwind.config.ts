@@ -37,6 +37,7 @@ const config: Config = {
       },
       fontFamily: {
         sans: ['var(--font-outfit)', 'system-ui', 'sans-serif'],
+        handwriting: ['var(--font-caveat)', 'cursive'],
       },
       animation: {
         'fade-in': 'fadeIn 0.5s ease-out',

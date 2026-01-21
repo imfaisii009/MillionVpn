@@ -26,7 +26,22 @@
       "mcp__chrome-devtools__fill",
       "Bash(git config:*)",
       "Bash(git push:*)",
-      "Bash(git add:*)"
+      "Bash(git add:*)",
+      "Bash(git commit:*)",
+      "Bash(xargs ls:*)",
+      "Bash(cat:*)",
+      "mcp__supabase__apply_migration",
+      "Bash(pnpm run build:*)",
+      "Bash(curl:*)",
+      "mcp__chrome-devtools__performance_start_trace",
+      "mcp__chrome-devtools__performance_analyze_insight",
+      "Bash(npx lighthouse:*)",
+      "Bash(node -e:*)",
+      "Bash(ls -la \"c:\\\\laragon\\\\www\\\\millionvpn\\\\supabase\"\" 2>nul || echo \"No supabase directory \")",
+      "mcp__supabase__list_extensions",
+      "mcp__supabase__search_docs",
+      "Bash(npx tsc:*)",
+      "Bash(pnpm build:*)"
     ]
   },
   "enableAllProjectMcpServers": true,

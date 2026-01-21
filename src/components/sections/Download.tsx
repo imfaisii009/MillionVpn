@@ -1,8 +1,4 @@
-'use client';
-
-import { motion } from 'framer-motion';
 import { ArrowRight, Download as DownloadIcon } from 'lucide-react';
-
 
 const platforms = [
     {
@@ -85,65 +81,51 @@ export default function Download() {
 
             <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
                 <div className="text-center mb-16">
-                    <motion.h2
-                        initial={{ opacity: 0, y: 20 }}
-                        whileInView={{ opacity: 1, y: 0 }}
-                        viewport={{ once: true }}
-                        className="text-4xl md:text-5xl font-bold bg-clip-text text-transparent bg-gradient-to-r from-slate-900 to-slate-700 dark:from-white dark:to-slate-300 mb-6"
-                    >
+                    <h2 className="text-4xl md:text-5xl font-bold bg-clip-text text-transparent bg-gradient-to-r from-slate-900 to-slate-700 mb-6">
                         Download Everywhere
-                    </motion.h2>
-                    <motion.p
-                        initial={{ opacity: 0, y: 20 }}
-                        whileInView={{ opacity: 1, y: 0 }}
-                        viewport={{ once: true }}
-                        transition={{ delay: 0.1 }}
-                        className="text-xl text-slate-600 dark:text-slate-400 max-w-2xl mx-auto"
-                    >
+                    </h2>
+                    <p className="text-xl text-slate-600 max-w-2xl mx-auto">
                         One subscription covers all your devices. Get secure access on any platform with our beautifully designed native apps.
-                    </motion.p>
+                    </p>
                 </div>
 
                 <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
-                    {platforms.map((platform, i) => (
-                        <motion.div
+                    {platforms.map((platform) => (
+                        <div
                             key={platform.name}
-                            initial={{ opacity: 0, y: 20 }}
-                            whileInView={{ opacity: 1, y: 0 }}
-                            viewport={{ once: true }}
-                            transition={{ delay: i * 0.1 }}
-                            whileHover={{ y: -5 }}
-                            className="group relative bg-white dark:bg-slate-900/50 border border-slate-200 dark:border-white/10 p-8 rounded-3xl backdrop-blur-sm overflow-hidden hover:shadow-2xl hover:border-slate-300 dark:hover:border-white/20 transition-all duration-300"
+                            className="group relative bg-white border border-slate-200 p-8 rounded-3xl backdrop-blur-sm overflow-hidden hover:shadow-2xl hover:border-slate-300 hover:-translate-y-1 transition-all duration-300"
                         >
                             {/* Glow Effect */}
                             <div className={`absolute top-0 right-0 w-32 h-32 bg-gradient-to-br ${platform.color} opacity-10 blur-2xl rounded-full group-hover:opacity-20 transition-opacity`} />
 
                             <div className="relative z-10">
-                                <div className={`w-16 h-16 rounded-2xl bg-gradient-to-br ${platform.color} flex items-center justify-center text-white shadow-lg mb-8 group-hover:scale-110 transition-transform duration-300`}>
+                                <div className={`w-16 h-16 rounded-2xl bg-gradient-to-br ${platform.color} flex items-center justify-center text-white shadow-lg mb-8 group-hover:scale-110 transition-transform duration-300`} aria-hidden="true">
                                     {platform.icon}
                                 </div>
 
                                 <div className="flex justify-between items-start mb-4">
                                     <div>
-                                        <h3 className="text-2xl font-bold text-slate-900 dark:text-white mb-1 group-hover:text-transparent group-hover:bg-clip-text group-hover:bg-gradient-to-r group-hover:from-blue-400 group-hover:to-cyan-400 transition-all">
+                                        <h3 className="text-2xl font-bold text-slate-900 mb-1 group-hover:text-primary-600 transition-colors">
                                             {platform.name}
                                         </h3>
-                                        <p className="text-sm font-medium text-slate-500 dark:text-slate-400">
+                                        <p className="text-sm font-medium text-slate-500">
                                             {platform.requirements}
                                         </p>
                                     </div>
-                                    <span className="px-2 py-1 bg-slate-100 dark:bg-white/10 text-xs font-mono rounded text-slate-600 dark:text-slate-300">
+                                    <span className="px-2 py-1 bg-slate-100 text-xs font-mono rounded text-slate-600">
                                         {platform.version}
                                     </span>
                                 </div>
 
-                                <button className="w-full mt-6 py-3 px-4 bg-slate-50 dark:bg-white/5 hover:bg-slate-100 dark:hover:bg-white/10 border border-slate-200 dark:border-white/10 rounded-xl flex items-center justify-center gap-2 group/btn transition-colors text-slate-900 dark:text-white font-medium">
-                                    <DownloadIcon className="w-4 h-4" />
-                                    <span>Download Now</span>
-                                    <ArrowRight className="w-4 h-4 opacity-0 -translate-x-2 group-hover/btn:opacity-100 group-hover/btn:translate-x-0 transition-all" />
+                                <button
+                                    className="w-full mt-6 py-3 px-4 bg-slate-50 hover:bg-slate-100 border border-slate-200 rounded-xl flex items-center justify-center gap-2 group/btn transition-colors text-slate-900 font-medium"
+                                >
+                                    <DownloadIcon className="w-4 h-4" aria-hidden="true" />
+                                    <span>Download {platform.name}</span>
+                                    <ArrowRight className="w-4 h-4 opacity-0 -translate-x-2 group-hover/btn:opacity-100 group-hover/btn:translate-x-0 transition-all" aria-hidden="true" />
                                 </button>
                             </div>
-                        </motion.div>
+                        </div>
                     ))}
                 </div>
             </div>

@@ -1,7 +1,4 @@
-'use client';
-
 import { Globe, Zap, Shield, Hand, Unlock, Monitor } from 'lucide-react';
-import { motion } from 'framer-motion';
 
 const features = [
     {
@@ -50,33 +47,18 @@ export default function Features() {
 
             <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
                 <div className="text-center mb-20">
-                    <motion.h2
-                        initial={{ opacity: 0, y: 20 }}
-                        whileInView={{ opacity: 1, y: 0 }}
-                        viewport={{ once: true }}
-                        className="text-4xl md:text-5xl font-bold text-white mb-6 tracking-tight"
-                    >
+                    <h2 className="text-4xl md:text-5xl font-bold text-white mb-6 tracking-tight">
                         Why millions choose <span className="text-transparent bg-clip-text bg-gradient-to-r from-primary-400 to-accent-teal">MillionVPN</span>
-                    </motion.h2>
-                    <motion.p
-                        initial={{ opacity: 0, y: 20 }}
-                        whileInView={{ opacity: 1, y: 0 }}
-                        viewport={{ once: true }}
-                        transition={{ delay: 0.1 }}
-                        className="text-gray-400 text-lg max-w-2xl mx-auto"
-                    >
+                    </h2>
+                    <p className="text-gray-400 text-lg max-w-2xl mx-auto">
                         Experience the next generation of privacy technology. Engineered for speed, designed for security.
-                    </motion.p>
+                    </p>
                 </div>
 
                 <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
-                    {features.map((feature, index) => (
-                        <motion.div
+                    {features.map((feature) => (
+                        <div
                             key={feature.title}
-                            initial={{ opacity: 0, y: 20 }}
-                            whileInView={{ opacity: 1, y: 0 }}
-                            viewport={{ once: true }}
-                            transition={{ delay: index * 0.1 }}
                             className="group relative"
                         >
                             {/* Card Background with Glassmorphism */}
@@ -90,7 +72,7 @@ export default function Features() {
                                 {/* Icon */}
                                 <div className={`relative w-14 h-14 rounded-2xl bg-gradient-to-br ${feature.gradient} flex items-center justify-center p-0.5 mb-6 shadow-lg`}>
                                     <div className="w-full h-full bg-gray-900 rounded-xl flex items-center justify-center">
-                                        <feature.icon className="h-7 w-7 text-white" />
+                                        <feature.icon className="h-7 w-7 text-white" aria-hidden="true" />
                                     </div>
                                 </div>
 
@@ -102,7 +84,7 @@ export default function Features() {
                                     {feature.description}
                                 </p>
                             </div>
-                        </motion.div>
+                        </div>
                     ))}
                 </div>
             </div>
