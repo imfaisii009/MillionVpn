@@ -10,10 +10,6 @@ export default function Logo({ className = "h-8 w-8", withText = false }: { clas
                 className={className}
             >
                 <defs>
-                    <linearGradient id="logo_gradient" x1="0%" y1="0%" x2="100%" y2="100%">
-                        <stop offset="0%" stopColor="#6D4AFF" />
-                        <stop offset="100%" stopColor="#2D9D9C" />
-                    </linearGradient>
                     <filter id="glow" x="-20%" y="-20%" width="140%" height="140%">
                         <feGaussianBlur stdDeviation="4" result="blur" />
                         <feComposite in="SourceGraphic" in2="blur" operator="over" />
@@ -23,7 +19,7 @@ export default function Logo({ className = "h-8 w-8", withText = false }: { clas
                 {/* Background Shield Outline */}
                 <path
                     d="M50 5 L85 20 V50 C85 75 50 95 50 95 C50 95 15 75 15 50 V20 L50 5 Z"
-                    stroke="url(#logo_gradient)"
+                    stroke="#2D9D9C"
                     strokeWidth="6"
                     strokeLinecap="round"
                     strokeLinejoin="round"
@@ -33,7 +29,7 @@ export default function Logo({ className = "h-8 w-8", withText = false }: { clas
                 {/* Central 'M' / Pulse Shape */}
                 <path
                     d="M30 40 L50 60 L70 40 M50 60 V30"
-                    stroke="url(#logo_gradient)"
+                    stroke="#2D9D9C"
                     strokeWidth="8"
                     strokeLinecap="round"
                     strokeLinejoin="round"
