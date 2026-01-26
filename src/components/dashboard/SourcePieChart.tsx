@@ -47,8 +47,8 @@ export default function SourcePieChart({ data }: SourcePieChartProps) {
                   borderRadius: '8px',
                   boxShadow: '0 4px 6px -1px rgb(0 0 0 / 0.1)',
                 }}
-                formatter={(value: number, name: string) => [
-                  `${value} (${((value / total) * 100).toFixed(1)}%)`,
+                formatter={(value, name) => [
+                  `${value} (${((Number(value) / total) * 100).toFixed(1)}%)`,
                   name,
                 ]}
               />

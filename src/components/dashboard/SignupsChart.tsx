@@ -52,7 +52,7 @@ export default function SignupsChart({ data }: SignupsChartProps) {
                 }}
                 labelStyle={{ color: '#111827', fontWeight: 600 }}
                 itemStyle={{ color: '#6366f1' }}
-                formatter={(value: number) => [value, 'Signups']}
+                formatter={(value) => [value, 'Signups']}
               />
               <Area
                 type="monotone"
