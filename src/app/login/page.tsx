@@ -2,20 +2,41 @@
 
 import { useState } from 'react';
 import Link from 'next/link';
+import { useRouter } from 'next/navigation';
 import { motion } from 'framer-motion';
-import { Mail, Lock, ArrowRight, Eye, EyeOff } from 'lucide-react';
+import { Mail, Lock, ArrowRight, Eye, EyeOff, AlertCircle } from 'lucide-react';
 import Logo from '@/components/ui/Logo';
+import { createClient } from '@/lib/supabase/client';
 
 export default function LoginPage() {
     const [showPassword, setShowPassword] = useState(false);
     const [loading, setLoading] = useState(false);
+    const [error, setError] = useState<string | null>(null);
+    const router = useRouter();
 
-    const handleSubmit = async (e: React.FormEvent) => {
+    const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
         e.preventDefault();
         setLoading(true);
-        // Simulate login delay
-        await new Promise(resolve => setTimeout(resolve, 2000));
-        setLoading(false);
+        setError(null);
+
+        const formData = new FormData(e.currentTarget);
+        const email = formData.get('email') as string;
+        const password = formData.get('password') as string;
+
+        const supabase = createClient();
+        const { error } = await supabase.auth.signInWithPassword({
+            email,
+            password,
+        });
+
+        if (error) {
+            setError(error.message);
+            setLoading(false);
+            return;
+        }
+
+        router.push('/dashboard');
+        router.refresh();
     };
 
     return (
@@ -43,7 +64,7 @@ export default function LoginPage() {
                     transition={{ delay: 0.2 }}
                     className="mt-6 text-center text-3xl font-extrabold text-gray-900"
                 >
-                    Welcome back
+                    Admin Login
                 </motion.h2>
                 <motion.p
                     initial={{ opacity: 0 }}
@@ -51,10 +72,7 @@ export default function LoginPage() {
                     transition={{ delay: 0.3 }}
                     className="mt-2 text-center text-sm text-gray-600"
                 >
-                    Or{' '}
-                    <Link href="/pricing" className="font-medium text-primary-600 hover:text-primary-500 transition-colors">
-                        create a new account
-                    </Link>
+                    Sign in to access the dashboard
                 </motion.p>
             </div>
 
@@ -65,6 +83,16 @@ export default function LoginPage() {
                 className="mt-8 sm:mx-auto sm:w-full sm:max-w-md relative z-10"
             >
                 <div className="bg-white py-8 px-4 shadow-xl shadow-gray-100 sm:rounded-2xl sm:px-10 border border-gray-100">
+                    {error && (
+                        <motion.div
+                            initial={{ opacity: 0, y: -10 }}
+                            animate={{ opacity: 1, y: 0 }}
+                            className="mb-4 p-3 rounded-lg bg-red-50 border border-red-200 flex items-center gap-2 text-red-700 text-sm"
+                        >
+                            <AlertCircle className="h-4 w-4 flex-shrink-0" />
+                            <span>{error}</span>
+                        </motion.div>
+                    )}
                     <form className="space-y-6" onSubmit={handleSubmit}>
                         <div>
                             <label htmlFor="email" className="block text-sm font-medium text-gray-700">
@@ -81,7 +109,7 @@ export default function LoginPage() {
                                     autoComplete="email"
                                     required
                                     className="focus:ring-primary-500 focus:border-primary-500 block w-full pl-10 sm:text-sm border-gray-300 rounded-lg py-3"
-                                    placeholder="you@example.com"
+                                    placeholder="admin@millionvpn.com"
                                 />
                             </div>
                         </div>
@@ -91,9 +119,6 @@ export default function LoginPage() {
                                 <label htmlFor="password" className="block text-sm font-medium text-gray-700">
                                     Password
                                 </label>
-                                <a href="#" className="text-xs font-medium text-primary-600 hover:text-primary-500">
-                                    Forgot password?
-                                </a>
                             </div>
                             <div className="mt-1 relative rounded-md shadow-sm">
                                 <div className="absolute inset-y-0 left-0 pl-3 flex items-center pointer-events-none">
@@ -106,7 +131,7 @@ export default function LoginPage() {
                                     autoComplete="current-password"
                                     required
                                     className="focus:ring-primary-500 focus:border-primary-500 block w-full pl-10 pr-10 sm:text-sm border-gray-300 rounded-lg py-3"
-                                    placeholder="••••••••"
+                                    placeholder="Enter your password"
                                 />
                                 <button
                                     type="button"
@@ -120,18 +145,6 @@ export default function LoginPage() {
                                     )}
                                 </button>
                             </div>
-                        </div>
-
-                        <div className="flex items-center">
-                            <input
-                                id="remember-me"
-                                name="remember-me"
-                                type="checkbox"
-                                className="h-4 w-4 text-primary-600 focus:ring-primary-500 border-gray-300 rounded"
-                            />
-                            <label htmlFor="remember-me" className="ml-2 block text-sm text-gray-900">
-                                Remember me
-                            </label>
                         </div>
 
                         <div>
@@ -156,8 +169,10 @@ export default function LoginPage() {
                     </form>
                 </div>
 
-                <div className="mt-8 text-center text-sm text-gray-500">
-                    <p>Protected by reCAPTCHA and Subject to Google Privacy Policy.</p>
+                <div className="mt-8 text-center">
+                    <Link href="/" className="text-sm text-gray-500 hover:text-primary-600 transition-colors">
+                        &larr; Back to home
+                    </Link>
                 </div>
             </motion.div>
         </div>
