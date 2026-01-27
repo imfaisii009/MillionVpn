@@ -47,7 +47,8 @@
       "mcp__supabase__get_logs",
       "Bash(pnpm install:*)",
       "Bash(ls -la \"c:\\\\laragon\\\\www\\\\millionvpn\\\\src\\\\components\\\\dashboard\"\" 2>/dev/null || echo \"Directory not found \")",
-      "Bash(ls -la \"c:\\\\laragon\\\\www\\\\millionvpn\\\\src\\\\app\\\\dashboard\"\" 2>/dev/null || echo \"Directory not found \")"
+      "Bash(ls -la \"c:\\\\laragon\\\\www\\\\millionvpn\\\\src\\\\app\\\\dashboard\"\" 2>/dev/null || echo \"Directory not found \")",
+      "mcp__supabase__get_project_url"
     ]
   },
   "enableAllProjectMcpServers": true,

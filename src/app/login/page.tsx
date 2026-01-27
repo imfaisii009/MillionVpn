@@ -1,6 +1,6 @@
 'use client';
 
-import { useState, useEffect } from 'react';
+import { useState, useEffect, Suspense } from 'react';
 import Link from 'next/link';
 import { useRouter, useSearchParams } from 'next/navigation';
 import { motion } from 'framer-motion';
@@ -9,7 +9,7 @@ import Logo from '@/components/ui/Logo';
 import NotificationModal from '@/components/ui/NotificationModal';
 import { createClient } from '@/lib/supabase/client';
 
-export default function LoginPage() {
+function LoginForm() {
     const [showPassword, setShowPassword] = useState(false);
     const [loading, setLoading] = useState(false);
     const [error, setError] = useState<string | null>(null);
@@ -60,13 +60,7 @@ export default function LoginPage() {
     };
 
     return (
-        <div className="min-h-screen bg-gray-50 flex flex-col justify-center py-12 sm:px-6 lg:px-8 relative overflow-hidden">
-            {/* Background Elements */}
-            <div className="absolute top-0 left-0 w-full h-full overflow-hidden pointer-events-none">
-                <div className="absolute top-0 left-0 w-[500px] h-[500px] bg-primary-100/50 rounded-full blur-[100px] -translate-x-1/2 -translate-y-1/2" />
-                <div className="absolute bottom-0 right-0 w-[500px] h-[500px] bg-accent-teal/10 rounded-full blur-[100px] translate-x-1/3 translate-y-1/3" />
-            </div>
-
+        <>
             <div className="sm:mx-auto sm:w-full sm:max-w-md relative z-10">
                 <motion.div
                     initial={{ opacity: 0, y: -20 }}
@@ -211,6 +205,26 @@ export default function LoginPage() {
                 message="You'll receive an email to download the software once we're ready. We appreciate your patience!"
                 icon={<Clock className="h-8 w-8 text-primary-600" />}
             />
+        </>
+    );
+}
+
+export default function LoginPage() {
+    return (
+        <div className="min-h-screen bg-gray-50 flex flex-col justify-center py-12 sm:px-6 lg:px-8 relative overflow-hidden">
+            {/* Background Elements */}
+            <div className="absolute top-0 left-0 w-full h-full overflow-hidden pointer-events-none">
+                <div className="absolute top-0 left-0 w-[500px] h-[500px] bg-primary-100/50 rounded-full blur-[100px] -translate-x-1/2 -translate-y-1/2" />
+                <div className="absolute bottom-0 right-0 w-[500px] h-[500px] bg-accent-teal/10 rounded-full blur-[100px] translate-x-1/3 translate-y-1/3" />
+            </div>
+
+            <Suspense fallback={
+                <div className="flex items-center justify-center">
+                    <div className="animate-spin rounded-full h-8 w-8 border-b-2 border-primary-600"></div>
+                </div>
+            }>
+                <LoginForm />
+            </Suspense>
         </div>
     );
 }
