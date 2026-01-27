@@ -1,3 +1,4 @@
+import Link from 'next/link';
 import { Check } from 'lucide-react';
 
 // Plan data for both display and schema
@@ -138,15 +139,16 @@ export default function Pricing() {
                                 ))}
                             </ul>
 
-                            <button
-                                className={`w-full py-4 px-6 rounded-xl font-bold transition-all text-center ${plan.highlight
+                            <Link
+                                href="/signup"
+                                className={`block w-full py-4 px-6 rounded-xl font-bold transition-all text-center ${plan.highlight
                                         ? 'bg-white text-primary-700 hover:bg-gray-100'
                                         : 'bg-primary-600 text-white hover:bg-primary-700'
                                     }`}
                                 aria-label={`Get started with ${plan.fullName}`}
                             >
                                 Get Started
-                            </button>
+                            </Link>
                         </div>
                     ))}
                 </div>

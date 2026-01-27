@@ -67,6 +67,21 @@ export async function POST(request: NextRequest) {
       );
     }
 
+    // Detect duplicate email: anon key returns fake user with empty identities
+    if (
+      authData?.user &&
+      (!authData.user.identities || authData.user.identities.length === 0)
+    ) {
+      return NextResponse.json(
+        {
+          success: false,
+          error: 'This email is already registered. Please log in instead.',
+          code: 'DUPLICATE_EMAIL',
+        },
+        { status: 409 }
+      );
+    }
+
     // Sign out immediately since new users can't access dashboard
     await supabase.auth.signOut();
 
