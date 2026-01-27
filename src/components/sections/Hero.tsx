@@ -2,7 +2,7 @@
 
 import dynamic from 'next/dynamic';
 import Image from 'next/image';
-import WaitlistForm from './WaitlistForm';
+import SignupForm from './SignupForm';
 
 // Lazy load HeartCounter since it requires Supabase client
 const HeartCounter = dynamic(() => import('@/components/ui/HeartCounter'), {
@@ -42,7 +42,7 @@ export default function Hero() {
 
                     {/* CTA Section with speakable class */}
                     <div className="speakable-cta max-w-md mx-auto">
-                        <WaitlistForm source="hero" />
+                        <SignupForm source="hero" />
                     </div>
 
                     {/* Heart Counter - Lazy loaded */}

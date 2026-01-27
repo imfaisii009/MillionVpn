@@ -9,7 +9,7 @@ import { useRouter } from 'next/navigation'
 
 const navigation = [
   { name: 'Dashboard', href: '/dashboard', icon: LayoutDashboard },
-  { name: 'Waitlist', href: '/dashboard/waitlist', icon: Users },
+  { name: 'Signups', href: '/dashboard/signups', icon: Users },
 ]
 
 export default function Sidebar() {

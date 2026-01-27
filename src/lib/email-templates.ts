@@ -211,3 +211,216 @@ export function getWaitlistWelcomeEmailHtml({ name }: { name?: string }) {
 </html>
   `.trim();
 }
+
+export function getSignupWelcomeEmailHtml({ name }: { name?: string }) {
+  const greeting = name ? `Welcome, ${name}!` : 'Welcome!';
+
+  return `
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+</head>
+<body style="margin: 0; padding: 0; background-color: #f6f9fc; font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, 'Helvetica Neue', Ubuntu, sans-serif;">
+  <table width="100%" cellpadding="0" cellspacing="0" style="background-color: #f6f9fc; padding: 40px 20px;">
+    <tr>
+      <td align="center">
+        <table width="600" cellpadding="0" cellspacing="0" style="background-color: #ffffff; border-radius: 12px; overflow: hidden; box-shadow: 0 4px 6px rgba(0, 0, 0, 0.07);">
+          <!-- Header -->
+          <tr>
+            <td style="background: linear-gradient(135deg, #5B3FD9 0%, #7C5CFF 100%); padding: 40px 20px; text-align: center;">
+              <h1 style="color: #ffffff; font-size: 32px; font-weight: 700; margin: 0; letter-spacing: -0.5px;">MillionVPN</h1>
+            </td>
+          </tr>
+
+          <!-- Content -->
+          <tr>
+            <td style="padding: 40px 40px 20px;">
+              <!-- Success Icon -->
+              <div style="text-align: center; margin-bottom: 24px;">
+                <div style="display: inline-block; width: 64px; height: 64px; border-radius: 50%; background-color: #10B981; color: #ffffff; font-size: 32px; line-height: 64px; text-align: center;">✓</div>
+              </div>
+
+              <h2 style="color: #1a1a1a; font-size: 28px; font-weight: 700; text-align: center; margin: 0 0 8px;">${greeting}</h2>
+              <p style="color: #5B3FD9; font-size: 18px; font-weight: 600; text-align: center; margin: 0 0 24px;">You've successfully signed up!</p>
+
+              <p style="color: #4a5568; font-size: 16px; line-height: 26px; margin: 0 0 20px;">
+                Thank you for creating your MillionVPN account. We're thrilled to have you on board! Our team is working hard to bring you the fastest, most secure VPN experience.
+              </p>
+
+              <!-- Info Box -->
+              <table width="100%" cellpadding="0" cellspacing="0" style="margin: 32px 0;">
+                <tr>
+                  <td align="center">
+                    <div style="display: inline-block; background: linear-gradient(135deg, #5B3FD9 0%, #7C5CFF 100%); border-radius: 16px; padding: 24px 40px; text-align: center;">
+                      <p style="color: rgba(255, 255, 255, 0.8); font-size: 12px; font-weight: 600; letter-spacing: 1px; margin: 0 0 8px;">COMING SOON</p>
+                      <p style="color: #ffffff; font-size: 24px; font-weight: 700; margin: 0 0 8px;">MillionVPN App</p>
+                      <p style="color: rgba(255, 255, 255, 0.9); font-size: 14px; margin: 0;">We'll notify you when it's ready to download</p>
+                    </div>
+                  </td>
+                </tr>
+              </table>
+
+              <p style="color: #4a5568; font-size: 16px; line-height: 26px; margin: 0 0 20px;">
+                Here's what you can look forward to:
+              </p>
+
+              <!-- Benefits List -->
+              <table width="100%" cellpadding="0" cellspacing="0" style="margin: 24px 0;">
+                <tr>
+                  <td style="padding: 8px 0;">
+                    <span style="font-size: 20px; margin-right: 12px;">🚀</span>
+                    <span style="color: #4a5568; font-size: 15px;">Lightning-fast 10 Gbps speeds</span>
+                  </td>
+                </tr>
+                <tr>
+                  <td style="padding: 8px 0;">
+                    <span style="font-size: 20px; margin-right: 12px;">🌍</span>
+                    <span style="color: #4a5568; font-size: 15px;">1,000+ servers in 100+ countries</span>
+                  </td>
+                </tr>
+                <tr>
+                  <td style="padding: 8px 0;">
+                    <span style="font-size: 20px; margin-right: 12px;">🔒</span>
+                    <span style="color: #4a5568; font-size: 15px;">Military-grade AES-256 encryption</span>
+                  </td>
+                </tr>
+                <tr>
+                  <td style="padding: 8px 0;">
+                    <span style="font-size: 20px; margin-right: 12px;">📵</span>
+                    <span style="color: #4a5568; font-size: 15px;">Strict no-logs policy</span>
+                  </td>
+                </tr>
+              </table>
+
+              <p style="color: #4a5568; font-size: 16px; line-height: 26px; margin: 0 0 20px;">
+                We'll send you an email as soon as the MillionVPN app is ready for download. Stay tuned!
+              </p>
+
+              <!-- CTA Button -->
+              <table width="100%" cellpadding="0" cellspacing="0" style="margin: 32px 0;">
+                <tr>
+                  <td align="center">
+                    <a href="https://millionvpn.com" style="display: inline-block; background-color: #5B3FD9; border-radius: 8px; color: #ffffff; font-size: 16px; font-weight: 600; padding: 14px 32px; text-decoration: none; text-align: center;">Visit MillionVPN</a>
+                  </td>
+                </tr>
+              </table>
+            </td>
+          </tr>
+
+          <!-- Footer -->
+          <tr>
+            <td style="border-top: 1px solid #e6ebf1; padding: 20px 40px 40px; text-align: center;">
+              <p style="color: #8898aa; font-size: 13px; line-height: 20px; margin: 0 0 12px;">
+                You received this email because you signed up for MillionVPN.
+              </p>
+              <p style="color: #8898aa; font-size: 13px; margin: 0 0 12px;">
+                <a href="https://millionvpn.com/privacy" style="color: #5B3FD9; text-decoration: none;">Privacy Policy</a>
+                &nbsp;•&nbsp;
+                <a href="https://millionvpn.com/terms" style="color: #5B3FD9; text-decoration: none;">Terms of Service</a>
+              </p>
+              <p style="color: #aab7c4; font-size: 12px; margin: 0;">
+                © 2025 MillionVPN. All rights reserved.
+              </p>
+            </td>
+          </tr>
+        </table>
+      </td>
+    </tr>
+  </table>
+</body>
+</html>
+  `.trim();
+}
+
+export function getNewSignupNotificationEmailHtml({
+  email,
+  name,
+}: {
+  email: string;
+  name?: string;
+}) {
+  return `
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+</head>
+<body style="margin: 0; padding: 0; background-color: #f6f9fc; font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, 'Helvetica Neue', Ubuntu, sans-serif;">
+  <table width="100%" cellpadding="0" cellspacing="0" style="background-color: #f6f9fc; padding: 40px 20px;">
+    <tr>
+      <td align="center">
+        <table width="600" cellpadding="0" cellspacing="0" style="background-color: #ffffff; border-radius: 12px; overflow: hidden; box-shadow: 0 4px 6px rgba(0, 0, 0, 0.07);">
+          <!-- Header -->
+          <tr>
+            <td style="background: linear-gradient(135deg, #5B3FD9 0%, #7C5CFF 100%); padding: 32px 20px; text-align: center;">
+              <h1 style="color: #ffffff; font-size: 28px; font-weight: 700; margin: 0 0 8px; letter-spacing: -0.5px;">MillionVPN</h1>
+              <p style="color: rgba(255, 255, 255, 0.85); font-size: 14px; margin: 0; font-weight: 500;">New User Signup</p>
+            </td>
+          </tr>
+
+          <!-- Content -->
+          <tr>
+            <td style="padding: 32px 40px;">
+              <!-- Success Icon -->
+              <div style="text-align: center; margin-bottom: 24px;">
+                <div style="display: inline-block; width: 56px; height: 56px; border-radius: 50%; background-color: #10B981; color: #ffffff; font-size: 28px; line-height: 56px; text-align: center;">🎉</div>
+              </div>
+
+              <h2 style="color: #1a1a1a; font-size: 24px; font-weight: 700; text-align: center; margin: 0 0 24px;">New User Registered!</h2>
+
+              <!-- User Details -->
+              <table width="100%" cellpadding="0" cellspacing="0" style="background-color: #f8fafc; border-radius: 12px; padding: 20px 24px; margin-bottom: 24px;">
+                <tr>
+                  <td style="padding: 8px 0;">
+                    <span style="color: #64748b; font-size: 14px; font-weight: 600; display: inline-block; width: 80px;">Email:</span>
+                    <span style="color: #5B3FD9; font-size: 14px; font-weight: 500;">${email}</span>
+                  </td>
+                </tr>
+                ${
+                  name
+                    ? `
+                <tr>
+                  <td style="padding: 8px 0;">
+                    <span style="color: #64748b; font-size: 14px; font-weight: 600; display: inline-block; width: 80px;">Name:</span>
+                    <span style="color: #1e293b; font-size: 14px; font-weight: 500;">${name}</span>
+                  </td>
+                </tr>
+                `
+                    : ''
+                }
+                <tr>
+                  <td style="padding: 8px 0;">
+                    <span style="color: #64748b; font-size: 14px; font-weight: 600; display: inline-block; width: 80px;">Time:</span>
+                    <span style="color: #1e293b; font-size: 14px; font-weight: 500;">${new Date().toLocaleString('en-US', { dateStyle: 'full', timeStyle: 'short' })}</span>
+                  </td>
+                </tr>
+              </table>
+
+              <!-- CTA -->
+              <table width="100%" cellpadding="0" cellspacing="0" style="margin: 24px 0;">
+                <tr>
+                  <td align="center">
+                    <a href="https://millionvpn.com/dashboard" style="display: inline-block; background-color: #5B3FD9; border-radius: 8px; color: #ffffff; font-size: 14px; font-weight: 600; padding: 12px 24px; text-decoration: none; text-align: center;">View Dashboard</a>
+                  </td>
+                </tr>
+              </table>
+            </td>
+          </tr>
+
+          <!-- Footer -->
+          <tr>
+            <td style="background-color: #f8fafc; padding: 20px 40px; text-align: center;">
+              <p style="color: #94a3b8; font-size: 12px; margin: 0;">This is an automated notification from MillionVPN.</p>
+            </td>
+          </tr>
+        </table>
+      </td>
+    </tr>
+  </table>
+</body>
+</html>
+  `.trim();
+}

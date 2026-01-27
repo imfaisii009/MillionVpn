@@ -1,18 +1,30 @@
 'use client';
 
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 import Link from 'next/link';
-import { useRouter } from 'next/navigation';
+import { useRouter, useSearchParams } from 'next/navigation';
 import { motion } from 'framer-motion';
-import { Mail, Lock, ArrowRight, Eye, EyeOff, AlertCircle } from 'lucide-react';
+import { Mail, Lock, ArrowRight, Eye, EyeOff, AlertCircle, Clock } from 'lucide-react';
 import Logo from '@/components/ui/Logo';
+import NotificationModal from '@/components/ui/NotificationModal';
 import { createClient } from '@/lib/supabase/client';
 
 export default function LoginPage() {
     const [showPassword, setShowPassword] = useState(false);
     const [loading, setLoading] = useState(false);
     const [error, setError] = useState<string | null>(null);
+    const [showNotAuthorizedModal, setShowNotAuthorizedModal] = useState(false);
     const router = useRouter();
+    const searchParams = useSearchParams();
+
+    // Show modal if redirected from middleware with unauthorized flag
+    useEffect(() => {
+        if (searchParams.get('unauthorized') === 'true') {
+            setShowNotAuthorizedModal(true);
+            // Clean up URL
+            router.replace('/login', { scroll: false });
+        }
+    }, [searchParams, router]);
 
     const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
         e.preventDefault();
@@ -24,17 +36,25 @@ export default function LoginPage() {
         const password = formData.get('password') as string;
 
         const supabase = createClient();
-        const { error } = await supabase.auth.signInWithPassword({
+        const { data: authData, error: authError } = await supabase.auth.signInWithPassword({
             email,
             password,
         });
 
-        if (error) {
-            setError(error.message);
+        if (authError) {
+            // If email not confirmed, treat as regular user - show modal
+            if (authError.message.toLowerCase().includes('email not confirmed')) {
+                setLoading(false);
+                setShowNotAuthorizedModal(true);
+                return;
+            }
+            setError(authError.message);
             setLoading(false);
             return;
         }
 
+        // Redirect to dashboard - middleware will handle role check
+        // If user is not admin, middleware will redirect back to login
         router.push('/dashboard');
         router.refresh();
     };
@@ -109,7 +129,6 @@ export default function LoginPage() {
                                     autoComplete="email"
                                     required
                                     className="focus:ring-primary-500 focus:border-primary-500 block w-full pl-10 sm:text-sm border-gray-300 rounded-lg py-3"
-                                    placeholder="admin@millionvpn.com"
                                 />
                             </div>
                         </div>
@@ -131,7 +150,6 @@ export default function LoginPage() {
                                     autoComplete="current-password"
                                     required
                                     className="focus:ring-primary-500 focus:border-primary-500 block w-full pl-10 pr-10 sm:text-sm border-gray-300 rounded-lg py-3"
-                                    placeholder="Enter your password"
                                 />
                                 <button
                                     type="button"
@@ -169,12 +187,30 @@ export default function LoginPage() {
                     </form>
                 </div>
 
-                <div className="mt-8 text-center">
+                <div className="mt-6 text-center">
+                    <p className="text-sm text-gray-600">
+                        Don&apos;t have an account?{' '}
+                        <Link href="/signup" className="font-medium text-primary-600 hover:text-primary-700">
+                            Sign up
+                        </Link>
+                    </p>
+                </div>
+
+                <div className="mt-4 text-center">
                     <Link href="/" className="text-sm text-gray-500 hover:text-primary-600 transition-colors">
                         &larr; Back to home
                     </Link>
                 </div>
             </motion.div>
+
+            {/* Not Authorized Modal */}
+            <NotificationModal
+                isOpen={showNotAuthorizedModal}
+                onClose={() => setShowNotAuthorizedModal(false)}
+                title="Thanks for signing up!"
+                message="You'll receive an email to download the software once we're ready. We appreciate your patience!"
+                icon={<Clock className="h-8 w-8 text-primary-600" />}
+            />
         </div>
     );
 }

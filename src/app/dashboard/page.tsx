@@ -1,57 +1,57 @@
 import { createClient } from '@/lib/supabase/server'
 import StatsCard from '@/components/dashboard/StatsCard'
 import SignupsChart from '@/components/dashboard/SignupsChart'
-import SourcePieChart from '@/components/dashboard/SourcePieChart'
+import RolePieChart from '@/components/dashboard/RolePieChart'
 import { Users, UserPlus, Clock, TrendingUp } from 'lucide-react'
 
-async function getWaitlistStats() {
+async function getSignupStats() {
   const supabase = await createClient()
 
-  // Get total waitlist count
+  // Get total signups count
   const { count: totalCount } = await supabase
-    .from('waitlist')
+    .from('profiles')
     .select('*', { count: 'exact', head: true })
 
-  // Get waitlist entries from last 7 days
+  // Get signups from last 7 days
   const sevenDaysAgo = new Date()
   sevenDaysAgo.setDate(sevenDaysAgo.getDate() - 7)
 
   const { count: recentCount } = await supabase
-    .from('waitlist')
+    .from('profiles')
     .select('*', { count: 'exact', head: true })
     .gte('created_at', sevenDaysAgo.toISOString())
 
-  // Get entries from previous 7 days for trend calculation
+  // Get signups from previous 7 days for trend calculation
   const fourteenDaysAgo = new Date()
   fourteenDaysAgo.setDate(fourteenDaysAgo.getDate() - 14)
 
   const { count: previousWeekCount } = await supabase
-    .from('waitlist')
+    .from('profiles')
     .select('*', { count: 'exact', head: true })
     .gte('created_at', fourteenDaysAgo.toISOString())
     .lt('created_at', sevenDaysAgo.toISOString())
 
-  // Get breakdown by source
-  const { data: sourceBreakdown } = await supabase
-    .from('waitlist')
-    .select('source')
+  // Get breakdown by role
+  const { data: roleBreakdown } = await supabase
+    .from('profiles')
+    .select('role')
 
-  const sourceCounts = sourceBreakdown?.reduce((acc, entry) => {
-    const source = entry.source || 'unknown'
-    acc[source] = (acc[source] || 0) + 1
+  const roleCounts = roleBreakdown?.reduce((acc, entry) => {
+    const role = entry.role || 'user'
+    acc[role] = (acc[role] || 0) + 1
     return acc
   }, {} as Record<string, number>) || {}
 
   // Get recent signups
   const { data: recentSignups } = await supabase
-    .from('waitlist')
+    .from('profiles')
     .select('*')
     .order('created_at', { ascending: false })
     .limit(5)
 
   // Get daily signups for the last 14 days
   const { data: allSignups } = await supabase
-    .from('waitlist')
+    .from('profiles')
     .select('created_at')
     .gte('created_at', fourteenDaysAgo.toISOString())
     .order('created_at', { ascending: true })
@@ -86,7 +86,7 @@ async function getWaitlistStats() {
   const today = new Date()
   today.setHours(0, 0, 0, 0)
   const { count: todayCount } = await supabase
-    .from('waitlist')
+    .from('profiles')
     .select('*', { count: 'exact', head: true })
     .gte('created_at', today.toISOString())
 
@@ -95,14 +95,14 @@ async function getWaitlistStats() {
     recentCount: recentCount || 0,
     previousWeekCount: previousWeekCount || 0,
     todayCount: todayCount || 0,
-    sourceCounts,
+    roleCounts,
     recentSignups: recentSignups || [],
     dailySignups,
   }
 }
 
 export default async function DashboardPage() {
-  const stats = await getWaitlistStats()
+  const stats = await getSignupStats()
 
   const weeklyTrend = stats.previousWeekCount > 0
     ? Math.round(((stats.recentCount - stats.previousWeekCount) / stats.previousWeekCount) * 100)
@@ -112,13 +112,13 @@ export default async function DashboardPage() {
     <div>
       <div className="mb-8">
         <h1 className="text-2xl font-bold text-gray-900">Dashboard</h1>
-        <p className="text-gray-500 mt-1">Welcome back! Here's your waitlist overview.</p>
+        <p className="text-gray-500 mt-1">Welcome back! Here's your signups overview.</p>
       </div>
 
       {/* Stats Grid */}
       <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6 mb-8">
         <StatsCard
-          title="Total Subscribers"
+          title="Total Users"
           value={stats.totalCount}
           icon={Users}
           description="All time signups"
@@ -149,7 +149,7 @@ export default async function DashboardPage() {
       {/* Charts Row */}
       <div className="grid grid-cols-1 lg:grid-cols-2 gap-6 mb-8">
         <SignupsChart data={stats.dailySignups} />
-        <SourcePieChart data={stats.sourceCounts} />
+        <RolePieChart data={stats.roleCounts} />
       </div>
 
       {/* Recent Signups Table */}
@@ -168,7 +168,7 @@ export default async function DashboardPage() {
                   Name
                 </th>
                 <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
-                  Source
+                  Role
                 </th>
                 <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
                   Date
@@ -189,11 +189,15 @@ export default async function DashboardPage() {
                       {signup.email}
                     </td>
                     <td className="px-6 py-4 whitespace-nowrap text-sm text-gray-500">
-                      {signup.name || '-'}
+                      {signup.full_name || '-'}
                     </td>
                     <td className="px-6 py-4 whitespace-nowrap text-sm">
-                      <span className="px-2 py-1 text-xs font-medium rounded-full bg-primary-100 text-primary-700">
-                        {signup.source || 'unknown'}
+                      <span className={`px-2 py-1 text-xs font-medium rounded-full ${
+                        signup.role === 'admin'
+                          ? 'bg-purple-100 text-purple-700'
+                          : 'bg-primary-100 text-primary-700'
+                      }`}>
+                        {signup.role || 'user'}
                       </span>
                     </td>
                     <td className="px-6 py-4 whitespace-nowrap text-sm text-gray-500">
