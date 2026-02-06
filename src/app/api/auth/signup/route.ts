@@ -32,7 +32,6 @@ export async function POST(request: NextRequest) {
     }
 
     const { email, password } = validationResult.data;
-    const fullName = body.fullName?.trim() || undefined;
     const normalizedEmail = email.toLowerCase();
 
     // Create user via Supabase Auth
@@ -40,11 +39,6 @@ export async function POST(request: NextRequest) {
     const { data: authData, error: authError } = await supabase.auth.signUp({
       email: normalizedEmail,
       password,
-      options: {
-        data: {
-          full_name: fullName,
-        },
-      },
     });
 
     if (authError) {
@@ -62,8 +56,8 @@ export async function POST(request: NextRequest) {
       }
 
       return NextResponse.json(
-        { success: false, error: 'Failed to create account. Please try again.' },
-        { status: 500 }
+        { success: false, error: authError.message || 'Failed to create account. Please try again.' },
+        { status: authError.status || 500 }
       );
     }
 
@@ -91,7 +85,7 @@ export async function POST(request: NextRequest) {
         from: process.env.EMAIL_FROM!,
         to: normalizedEmail,
         subject: "Welcome to MillionVPN! 🎉 Your Account is Ready",
-        html: getSignupWelcomeEmailHtml({ name: fullName }),
+        html: getSignupWelcomeEmailHtml({}),
       });
 
       if (welcomeEmailError) {
@@ -110,7 +104,6 @@ export async function POST(request: NextRequest) {
       if (contactEmails.length > 0) {
         const notificationHtml = getNewSignupNotificationEmailHtml({
           email: normalizedEmail,
-          name: fullName,
         });
 
         const { error: notificationError } = await resend.batch.send(

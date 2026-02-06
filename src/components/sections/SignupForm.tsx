@@ -4,7 +4,7 @@ import { useState } from 'react';
 import { useForm } from 'react-hook-form';
 import { zodResolver } from '@hookform/resolvers/zod';
 import { motion, AnimatePresence } from 'framer-motion';
-import { Mail, Lock, Sparkles, CheckCircle2, AlertCircle, Loader2 } from 'lucide-react';
+import { Mail, Lock, CheckCircle2, AlertCircle, Loader2 } from 'lucide-react';
 import { signupFormSchema, type SignupFormSchemaData } from '@/lib/validations/signup';
 import { cn } from '@/lib/utils';
 
@@ -97,10 +97,6 @@ export default function SignupForm({ source = 'hero', className }: SignupFormPro
             onSubmit={handleSubmit(onSubmit)}
             className="space-y-4"
           >
-            <div className="flex items-center justify-center gap-2 text-sm text-primary-600 font-medium mb-4">
-              <Sparkles className="h-4 w-4" />
-              <span>Get early access when we launch</span>
-            </div>
 
             <div className="flex flex-col gap-3">
               {/* Email Input */}
@@ -130,7 +126,7 @@ export default function SignupForm({ source = 'hero', className }: SignupFormPro
                 <input
                   {...register('password')}
                   type="password"
-                  placeholder="Create a password (min 8 chars)"
+                  placeholder="Create a password"
                   autoComplete="new-password"
                   className={cn(
                     'w-full pl-12 pr-4 py-3.5 rounded-xl border bg-white',
