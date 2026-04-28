@@ -86,7 +86,7 @@ export default function HeartCounter() {
         'postgres_changes',
         {
           event: 'UPDATE',
-          schema: 'public',
+          schema: 'millionvpn',
           table: 'heart_counter',
           filter: 'id=eq.global',
         },
